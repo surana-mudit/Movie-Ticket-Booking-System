@@ -1,0 +1,53 @@
+#nav1 {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+.nav1-1 {
+	float: left;
+}
+
+.nav1-2 {
+	float: right;
+}
+
+.nav1-2 a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.nav1-2 a:hover {
+	color: springgreen;
+}
+
+.nav1-1 a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.nav1-1 a:hover {
+	color: springgreen;
+}
+
+.bookmyshow{
+	background-color: dimgrey;
+}
+
+#down{
+	background-color: lightslategrey
+}
+#image {
+	text-align: center;
+}
+#image a:hover{
+	color: green
+}

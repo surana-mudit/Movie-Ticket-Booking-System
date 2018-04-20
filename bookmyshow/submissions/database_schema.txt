@@ -1,0 +1,50 @@
+Database Schema
+BookMyShow2
+
+
+* __tablename__ => User :
+ -Username(primary key,string)
+ -Name(string)
+ -Email(string,unique = True)
+ -Password(hash)
+ -Phone_No(Integer)             //optional
+
+* __tablename__ => Movies :
+ -Movie_Id(primary key, Numeric)
+ -Movie_Name(string)
+ -Language(string)
+ -Cast(string)
+ -Descriptions(string)
+ -Release_Date(date)
+ -Closing_Date(date)
+ -Rating(integer)               //this will be initialised to a default value and as soon as a user rates a movie this will change to the average rating given by the users
+
+* __tablename_ => Theaters :
+ -Theatre_Id(primary key,numeric)
+ -Theatre_Name(string)
+ -Theatre_Type("Small" or  "Medium" or "Big")
+ -Theatre_Description(string, includes location)
+ -Theatre_Contact(Integer)
+ -Movies(Array)
+
+*__tablename_ => Transactions :
+ -Transaction_Id(Primary Key)
+ -Username(Foreign Key)
+ -Movie_Id(FOreign Key)
+ -Theatre_Id(Foreign Key)
+ -Date_Time(Timestamp)
+ -Seats(String)
+ -Amount(Integer)
+
+*__tablenme__ => Ratings
+ -Username(Foreign Key)
+ -Movie_Id(Foreign Key)
+ -Rating(Integer)          //we plan to make stars(buttons) to indicate the rating
+
+* Frameworks Used:
+ -Flask/Python
+ -SqlAlchemy
+ -Bootstrap
+ -jQuery
+ -Others
+

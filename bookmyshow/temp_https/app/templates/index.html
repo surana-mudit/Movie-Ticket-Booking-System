@@ -1,0 +1,98 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../static/css/index.css">
+<style type="text/css">
+  #reg i:hover{
+    color: white;
+  }
+  #h a:hover{
+    background-color: : springgreen;
+  }
+</style>
+<title>ITWS-II Main Project</title>
+</head>
+<body>
+<ul id="nav1">
+<li class="nav1-1"  style="font-size: 20" id="h"><a href="/home"><i style="font-size: 30px; color: grey" class="fa fa-home" ></i></a></li>
+  <li class="nav1-1" style="font-size: 20"><a  href="/movies">MOVIES</a></li>
+  <li class="nav1-2" style="color: white; font-size: 20; padding-top: 15; padding-right: 50"><span class="glyphicon glyphicon-map-marker" style="color: white; "></span> Hyderabad</li>
+  <li class="nav1-2" style="font-size: 20"><a href="#news">CONTACT US</a></li>
+  <li class="nav1-2" style="font-size: 20">
+    <div id="state"></div>
+  </li>
+  <li class="nav1-2" style="font-size: 20"><div id="hi"></div></h3></li></center>
+  <li class="nav1-2" id="reg" style="font-size: 20"><div id="state1"></div></li>
+  <li class="nav1-2" style="font-size: 20"><div id="profile"></div></li>  
+</ul> 
+<div class=	"bookmyshow"><br />
+	<div style="color: white; font-size: 40px">book<img src="{{ url_for('static', filename='my.png') }}" style="width: 50" />show</div><br />
+</div>
+<div class="w3-content w3-section" style="max-width:100%">
+  <img class="mySlides" src="../static/img/Begumjaan.jpg" style="height: 500; width: 100%">
+  <img class="mySlides" src="../static/img/Badrinath.jpg" style="height: 500; width: 100%">
+  <img class="mySlides" src="../static/img/Justice.jpg" style="height: 500; width: 100%">
+</div>
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {
+    	myIndex = 1;
+    }    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2000); 
+}
+$(document).ready(function(){
+$.ajax({
+    url:'https://127.0.0.1:5000/movies',
+    method:'POST',
+    success:function(response){
+      console.log(response);
+      if(response.state==="LOGOUT"){
+          x="<a href='/logout'>LOGOUT</a>";
+          y="<a href='#' style='font-size: 23;'>Hi "+(response.user).toString()+"</a>";
+          z="<a href='/profile'><i class='material-icons' style='padding-right: 20; font-size: 30'>person</i></a>"
+          $("#hi").append(y);
+          $("#profile").append(z);
+      }
+      else{
+        x="<a href='/login'>SIGN IN</a>";
+        y="<a href='/register'><i class='material-icons' style='color: grey; font-size:30'  id='reg'>person_add</i></a>"
+        $("#state1").append(y);
+      }
+      $("#state").append(x);
+    },
+    error:function(response){
+      alert(JSON.parse(response.responseText).message);
+    }
+  });
+});
+</script>
+<div id="down" style = "height: 350">
+	<div><br />
+		<div style="color: white; font-size: 40px; text-align: center;">book<img src="{{ url_for('static', filename='my.png') }}" style="width: 50" />show</div><br />
+			<div id="image">
+				<a href="https://www.facebook.com/BookMyShowIN"><img src="{{ url_for('static', filename='fb.png') }}" class="img-circle" style="width: 70" /></a>
+				<a href="https://plus.google.com/110517543803442814698/posts"><img src="{{ url_for('static', filename='g+.png') }}" class="img-circle" style="width: 70"/></a>
+				<a href="https://www.instagram.com/bmsbookmyshow/"><img src="{{ url_for('static', filename='instagram.png') }}" class="img-circle" style="width: 70"/></a>
+				<a href="https://twitter.com/BookMyShow/"><img src="{{ url_for('static', filename='twitter.png') }}" class="img-circle" style="width: 70"/></a>
+			</div>
+		<br /><br/><br/>
+		<div style="text-align: center;">Copyright 2017 &copy; Bigtree Entertainment Pvt. Ltd. All Rights Reserved.</div>
+<div style='text-align:center;'>The content and images used on this site are copyright protected and copyrights vests with the respective owners. The usage of the content and images on this website is intended to promote the works and no endorsement of </div> <div style="text-align: center;">the artist shall be implied. Unauthorized use is prohibited and punishable by law.</div>
+</div>
+</div>
+</body>
+</html>	

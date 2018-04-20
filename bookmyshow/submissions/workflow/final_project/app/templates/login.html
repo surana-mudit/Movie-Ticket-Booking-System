@@ -1,0 +1,68 @@
+<html>
+   <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <title>SIGN IN</title>
+   </head>
+   <body style="background-color:light	cyan">
+      <div class="container-fluid">
+         <div align="center" style="font-size:150%; background-color:#0c1747; color:089c3e; height:100 ">
+            <br/>SIGN IN<br/><br/>
+         </div>
+         <div style="background-color:#deeceb; height:885px;">
+            <div class="signup_extra" align="center">
+               <br/>
+               <br/>
+               <center><a href="/home"><img class="img-rounded" src="{{ url_for('static', filename='home.jpg') }}" height="50" width="50" align="center"></a></center>
+            </div>
+            <br/>
+            <br/>
+            <div align ="center" class="row">
+               <div class="col-sm-4 col-sm-offset-4">
+                  <form method="POST" id="form" onsubmit="return false">
+                     <legend>Login</legend>
+                     <p class="message text-danger"></p>
+                     <div class="form-group">
+                        <label for="register-email">Email or Username</label>
+                        <input type="text" placeholder="Enter Your Email or Username" size="60" name="email_username" class="form-control">
+                     </div>
+                     <div class="form-group">
+                        <label for="register-email">Password</label>
+                        <input type="password" placeholder="PASSWORD*" size="60" name="password" class="form-control">
+                     </div>
+                     <button class="btn btn-primary" onclick="login()">Sign In</button>
+                  </form>
+               </div>
+            </div>
+            <br/>
+            <br/>
+            <div align="center">
+               Not a user?<a href="/register">Register</a><br/><br/>
+            </div>
+         </div>
+      </div>
+      <script type="text/javascript">
+         var login=function(){
+         var v=document.getElementById("form");
+         email_username=v.email_username.value;
+         pass=v.password.value;
+         $.ajax({
+         	url:'https://127.0.0.1:5000/login',
+         	method:'POST',
+         	data:{email_username:email_username, password:pass},
+         	success:function(response){
+         		if(email_username==="admin@admin.com" && pass==="admin")
+         			window.location.href="/admin";
+         		else
+         			window.location.href="https://127.0.0.1:5000/movies";
+         	},
+         	error:function(response){			
+         		alert(JSON.parse(response.responseText).message);
+         	}
+         });
+         };	
+      </script>
+   </body>
+</html>
+

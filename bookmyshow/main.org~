@@ -1,0 +1,711 @@
+#+TITLE:	BOOK MY SHOW 2
+#+AUTHOR:	MOHIT KURI (20161141) , MUDIT SURANA (20161100) , ROHIT KUMAR AGARWAL (20161011) , SAMYAK JAIN (20161083)
+#+DATE:		[2017-04-17]
+
+
+* INTRODUCTION
+We have designed a basic movie-ticket booking website. 
+
+The main idea was to make it as user-friendly as possible. 
+ - We have a simple Sign-Up process and multiple ways to Sign-In.
+ - You are allowed to proceed your search based on Movie selection or Theatre selection.
+ - Users can filter thei available movies based on Language or ratings
+ - Users can rate the movies
+ - The site has been hosted on =https= ... to make it more secure
+
+We have also maintained a profile page for each registered user when he/she can check their account details and their booking history
+
+
+
+* DATABASES SCHEMA
+
+BookMyShow2
+
+** USER
+__tablename__ => User :
+ -id(primary key , integer, auto-increment)
+ -Username(string)
+ -Name(string)
+ -Email(string,unique = True)
+ -Password(hash)
+ -Phone_No(Integer)
+ 
+** MOVIES
+__tablename__ => Movies :
+ -id(primary key, integer , auto-increment)
+ -Movie_Name(string)
+ -Language(string)
+ -Cast(string)
+ -Descriptions(string)
+ -Release_Date(date)
+ -Closing_Date(date)
+ -Rating(integer)
+ -user_no.(integer)
+ -user_rated(string)
+
+** THEATRES
+__tablename_ => Theaters :
+ -Id(primary key, integer , auto-increment)
+ -Movie_name(string)
+ -Theatre_Name(string)
+ -Theatre_Type("Small" or  "Medium" or "Big")
+ -Theatre_Desc(string, includes location)
+ -Theatre_Contact(Integer)
+ -Theatre_seats(string)
+ 
+** PROFILE
+__tablename_ => Profile :
+ -Id(Primary Key)
+ -User_name(Foreign Key)
+ -Movie_Name(FOreign Key)
+ -Theatre_Name(Foreign Key)
+ -Time(string)
+ -Date(string)
+ -Seats(String)
+ -Show_time(string)
+
+** Frameworks Used:
+ -Flask/Python
+ -SqlAlchemy
+ -Bootstrap
+ -jQuery
+ -Others
+
+
+* Workflow
+
+- First we started with databases. We wrote a database schema ie how our tables will look like. We made four databases user, theatres,movies and user profile.
+
+- Everything about our databases is in the database schema above. The frontend and backend was work hand in hand. We have used sqlite as our engine and mysqlalchemy as its wrapper. 
+
+- We used flask and sql to build our databases.We first started with user models and controllers as that is the base of our app.Then we went on to designing our page using html,css,js and bootstrap. 
+
+- We set proper linking between our databases user and our html page.So this process went on and on. We created one database and the corresponding html page was ready.Links were done at the same time.
+
+- And finally when our app was functional we started giving styling to our page.
+
+
+* User
+
+** Models
+
+Our Class User and the information about tables is defined here
+
+#+BEGIN_SRC 
+
+from flask_sqlalchemy import SQLAlchemy
+from app import db
+from werkzeug.security import generate_password_hash, check_password_hash
+
+class User(db.Model):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(255))
+    username = db.Column(db.String(255), unique=True)
+    email = db.Column(db.String(255), unique=True)
+    password = db.Column(db.String(255))
+    phone = db.Column(db.Integer,unique=True)
+
+    def __init__(self,name,username,email, password,phone):
+        self.name = name
+        self.username = username
+        self.email = email
+        self.password = generate_password_hash(password)
+        self.phone = phone
+#+END_SRC
+
+#+BEGIN_SRC
+
+    def to_dict(self):
+        return {
+            'id' : self.id,
+            'username' : self.username,
+            'email': self.email,    
+        }
+        
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+    def __repr__(self):
+        return "User<%d> %s" % (self.id, self.email)
+ 
+
+#+END_SRC
+
+** Controllers
+
+#+BEGIN_SRC
+
+from flask import Blueprint, request, session, jsonify,redirect , render_template
+from sqlalchemy.exc import IntegrityError
+from app import db
+from .models import User
+from app.movies.models import Movies
+from app.theatres.models import Theatres
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+mod_user=Blueprint('user', __name__)
+
+
+@mod_user.route('/register',methods=['POST', 'GET'])
+def addUser():
+    if request.method == 'POST':
+        try:
+            name = request.form['name']
+            username = request.form['username']
+            email = request.form['email']
+            password = request.form['password']
+            retype_password = request.form['retype_password']
+            phone = request.form['phone']
+        except KeyError as e:
+            return jsonify(success=False, message="%s not sent in the request" % e.args), 400
+
+        if '@' not in email:
+            return jsonify(success=False, message="Please enter a valid email"), 400
+        if password!=retype_password:
+    	    return jsonify(success=False, message="Passwords Do Not Match"),400
+        if '@' in username:
+            return jsonify(success=False, message="username must be alpha-numeric"),400    
+        u = User(name,username,email, password,phone)
+        db.session.add(u)
+        try:
+            db.session.commit()
+        except IntegrityError as e:
+            return jsonify(success=False, message="This email/username already exists"), 400
+        return redirect('http://localhost:5000/login')
+    elif request.method == 'GET':
+        return render_template('signup.html')
+
+@mod_user.route('/login',methods=['GET'])
+def view1():
+    return render_template('login.html')
+
+@mod_user.route('/login', methods=['GET'])
+def check_login():
+    if 'user_id' in session:
+        user = User.query.filter(User.id == session['user_id']).first()
+        return jsonify(success=True, user=user.to_dict())
+
+    return jsonify(success=False), 401
+
+@mod_user.route('/login', methods=['POST'])
+def login():
+    try:
+        email_username = request.form['email_username']
+        password = request.form['password']
+    except KeyError as e:
+        return jsonify(success=False, message="%s not sent in the request" % e.args), 400
+
+    if email_username == 'admin@admin.com' or email_username=='admin':
+    	if password == 'admin':
+            session['user_id']=1
+            print(session['user_id'])
+            return redirect('/admin')
+    else: 
+        user = User.query.filter(User.email == email_username).first()
+        if user is None:
+            user = User.query.filter(User.username == email_username).first()
+        if user is None or not user.check_password(password):
+            return jsonify(success=False, message="Invalid Credentials"), 400
+
+        session['user_id'] = user.id
+        print(session['user_id'])
+        return redirect('http://localhost:5000/movies')
+
+
+@mod_user.route('/logout', methods=['GET'])
+def logout():
+    print(session['user_id'])
+    session.pop('user_id')
+    return redirect('http://localhost:5000/login')
+
+@mod_user.route('/movies',methods=['GET'])
+def show():
+    return render_template('movies.html')
+
+@mod_user.route('/movies',methods=['POST'])
+def show1():
+    x={}
+    x["movies"]=[]
+    for i in Movies.query.all():
+        x["movies"].append(i.to_dict())
+
+    print(x)
+    if 'user_id' in session:
+        user1=User.query.filter(User.id==session['user_id']).first()
+        print(user1.to_dict()['username'])
+        return jsonify(state="LOGOUT",url="/logout",movies=x,user=user1.to_dict()['username'])
+    else:
+        return jsonify(state="SIGN IN",url="/login",movies=x)
+
+@mod_user.route('/',methods=['GET'])
+def add():
+    db.session.add(User("admin","admin","admin@admin.com","admin",9898908717))
+    db.session.commit()
+    db.session.add(Movies("Begumjaan","Hindi","Vidya Balan","Nice Movie","2017-04-04","2017-04-11","NR",0,"[]"))
+    db.session.commit()
+    db.session.add(Movies("Badrinath","Hindi","alia bhatt","Nice Movie","2017-04-04","2017-04-11","NR",0,"[]"))
+    db.session.commit()
+    return redirect('/home')
+
+@mod_user.route('/home',methods=['GET'])
+def view():
+	return render_template('index.html')
+
+@mod_user.route('/admin',methods=['GET'])
+def view3():
+	return render_template('admin.html')
+'''
+@mod_user.route('/register',methods=['GET'])
+ef view2():
+    return render_template('signup.html')
+'''
+@mod_user.route('/movies/show/<name>',methods=['GET'])
+def view4(name):
+	return render_template('show.html',name=name)
+
+@mod_user.route('/movies/show/<name>',methods=['POST'])
+def view5(name):
+	movie=Movies.query.filter(Movies.Movie_Name== name).first()
+	return jsonify(movie=movie.to_dict())
+
+
+
+@mod_user.route('/theatres',methods=['POST'])
+def show2():
+    x={}
+    x["theatres"]=[]
+    name=request.form['name']
+    for i in Theatres.query.filter(Theatres.Movie_Name==name).all():
+        x["theatres"].append(i.to_dict())
+        
+    print(x)
+    if 'user_id' in session:
+        return jsonify(state="LOGOUT",url="/logout",theatres=x)
+    else:
+        return jsonify(state="SIGN IN",url="/login",theatres=x)
+
+
+#+END_SRC
+
+
+* Theatres
+
+** Models
+
+#+BEGIN_SRC
+
+from flask_sqlalchemy import SQLAlchemy
+from app import db
+	
+class Theatres(db.Model):
+	__tablename__ = 'theatres'
+	id = db.Column(db.Integer , primary_key=True,autoincrement=True)
+	Movie_Name=db.Column(db.String(120))
+	Theatre_Name = db.Column(db.String(120))
+	Theatre_Type = db.Column(db.String(120))
+	Theatre_Desc = db.Column(db.String(500))
+	Theatre_Contact = db.Column(db.String(60))
+	Theatre_Seats= db.Column(db.String(10000))
+
+	def __init__(self,Movie_Name,Theatre_Name,Theatre_Type,Theatre_Desc,Theatre_Contact,Theatre_Seats):
+		self.Movie_Name = Movie_Name
+		self.Theatre_Name = Theatre_Name
+		self.Theatre_Type = Theatre_Type
+		self.Theatre_Desc = Theatre_Desc
+		self.Theatre_Contact = Theatre_Contact
+		self.Theatre_Seats=Theatre_Seats
+
+	def to_dict(self):
+		return {
+			'Movie_Name' : self.Movie_Name,
+			'Theatre_Name' : self.Theatre_Name,
+			'Theatre_Type' : self.Theatre_Type,
+			'Theatre_Desc' : self.Theatre_Desc,
+			'Theatre_Contact' : self.Theatre_Contact,
+			'Theatre_Seats': self.Theatre_Seats
+		}
+
+	def __repr__(self):
+		return "Theatre_Id %s , Theatre_Name %s , Theatre_Type %s , Theatre_Desc %s , Theatre_Contact %s" % (self.id , self.Theatre_Name , self.Theatre_Type , self.Theatre_Desc , self.Theatre_Contact)
+
+
+#+END_SRC
+
+** Controllers
+
+#+BEGIN_SRC 
+
+from flask import Blueprint	, request, session, jsonify, redirect, render_template	
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy import and_
+from app import db
+from .models import Theatres
+from app.movies.models import Movies
+#import json
+
+mod_theatres = Blueprint('theatres', __name__)
+
+@mod_theatres.route('/payment',methods=['GET'])
+def final():
+	return render_template('final.html')
+
+@mod_theatres.route('/add_theatre',methods=['POST'])
+def add_theatres():
+	try:
+		Threatre_Name = request.form['Theatre_Name']
+		Threatre_Type = request.form['Theatre_Type']
+		Threatre_Desc = request.form['Theatre_Desc']
+		Threatre_Contact = request.form['Theatre_Contact']
+
+	except KeyError as e:
+		return jsonify(success=False,message="%s not sent in the request" % e.args), 400
+	movies=Movies.query.all()
+	for i in movies:
+		a=i.to_dict()['Movie_Name']	
+		theatre = Theatres(a,Threatre_Name,Threatre_Type,Threatre_Desc,Threatre_Contact,"[[],[],[],[],[]]")
+		db.session.add(theatre)
+
+	try:
+		db.session.commit()
+	except IntegrityError as e:
+		return jsonify(success=False, message="This theatre already exists"), 400
+	return redirect('/admin')
+
+@mod_theatres.route('/blocked',methods=['POST'])
+def blocked_seats():
+	movie_name=request.form['name']
+	theatre_name=request.form['theatre_name']
+	theatre=Theatres.query.filter(and_(Theatres.Movie_Name==movie_name,Theatres.Theatre_Name==theatre_name)).first()
+	seats=eval(theatre.Theatre_Seats)
+	return jsonify(seats=seats)
+@mod_theatres.route('/Medium/<movie_name>/<theatre_name>/<time>',methods=['GET','POST'])
+def med_seats(movie_name,theatre_name,time):
+	if request.method=='GET':
+		return render_template('medium_seats.html',theatre_name=theatre_name,time=time,movie_name=movie_name)
+	elif request.method=='POST':
+		try:
+			theatre=Theatres.query.filter(and_(Theatres.Movie_Name==movie_name,Theatres.Theatre_Name==theatre_name)).first()
+			arr=request.form['arr']
+		except KeyError as e:
+			return jsonify(success=False,message="%s not sent in the request" % e.args), 400	
+		print(theatre)
+		arr=arr.split(',')
+		print(arr)
+		seats=eval(theatre.Theatre_Seats)
+		if time=="9AM":
+			for i in arr:
+				seats[0].append(i)
+		elif time=="12PM":
+			for i in arr:
+				seats[1].append(i)
+		elif time=="3PM":
+			for i in arr:
+				seats[2].append(i)
+		elif time=="6PM":
+			for i in arr:
+				seats[3].append(i)
+		elif time=="9PM":
+			for i in arr:
+				seats[4].append(i)
+		print(seats)		
+		seats=repr(seats)
+		theatre.Theatre_Seats=seats
+		db.session.commit()
+		return redirect('/payment')
+
+@mod_theatres.route('/Small/<movie_name>/<theatre_name>/<time>',methods=['GET','POST'])
+def small_seats(movie_name,theatre_name,time):
+	if request.method=='GET':
+		return render_template('small_seats.html',theatre_name=theatre_name,time=time,movie_name=movie_name)
+	elif request.method=='POST':
+		try:
+			theatre=Theatres.query.filter(and_(Theatres.Movie_Name==movie_name,Theatres.Theatre_Name==theatre_name)).first()
+			arr=request.form['arr']
+		except KeyError as e:
+			return jsonify(success=False,message="%s not sent in the request" % e.args), 400	
+		print(theatre)
+		arr=arr.split(',')
+		print(arr)
+		seats=eval(theatre.Theatre_Seats)
+		if time=="9AM":
+			for i in arr:
+				seats[0].append(i)
+		elif time=="12PM":
+			for i in arr:
+				seats[1].append(i)
+		elif time=="3PM":
+			for i in arr:
+				seats[2].append(i)
+		elif time=="6PM":
+			for i in arr:
+				seats[3].append(i)
+		elif time=="9PM":
+			for i in arr:
+				seats[4].append(i)
+		print(seats)		
+		seats=repr(seats)
+		theatre.Theatre_Seats=seats
+		db.session.commit()
+		return redirect('/payment')
+
+
+
+@mod_theatres.route('/Big/<movie_name>/<theatre_name>/<time>',methods=['GET','POST'])
+def seats(movie_name,theatre_name,time):
+	if request.method=='GET':
+		return render_template('big_seats.html',theatre_name=theatre_name,time=time,movie_name=movie_name)
+	elif request.method=='POST':
+		try:
+			theatre=Theatres.query.filter(and_(Theatres.Movie_Name==movie_name,Theatres.Theatre_Name==theatre_name)).first()
+			arr=request.form['arr']
+		except KeyError as e:
+			return jsonify(success=False,message="%s not sent in the request" % e.args), 400	
+		print(theatre)
+		arr=arr.split(',')
+		print(arr)
+		seats=eval(theatre.Theatre_Seats)
+		if time=="9AM":
+			for i in arr:
+				seats[0].append(i)
+		elif time=="12PM":
+			for i in arr:
+				seats[1].append(i)
+		elif time=="3PM":
+			for i in arr:
+				seats[2].append(i)
+		elif time=="6PM":
+			for i in arr:
+				seats[3].append(i)
+		elif time=="9PM":
+			for i in arr:
+				seats[4].append(i)
+		print(seats)
+		seats=repr(seats)
+		theatre.Theatre_Seats=seats
+		db.session.commit()
+		return redirect('/payment')		
+
+#+END_SRC
+
+
+* Movies
+
+** Models
+
+#+BEGIN_SRC
+
+from flask_sqlalchemy import SQLAlchemy
+from app import db
+
+class Movies(db.Model):
+	__tablename__ = 'movies'
+	id = db.Column(db.Integer , primary_key=True,autoincrement=True)
+	Movie_Name = db.Column(db.String(120),unique=True)
+	Language = db.Column(db.String(120))
+	Cast = db.Column(db.String(120))
+	Desc = db.Column(db.String(500))
+	Release_Date = db.Column(db.String(100))
+	Closing_Date = db.Column(db.String(100))
+	Rating =  db.Column(db.String(20))
+	User_No = db.Column(db.Integer)
+	User_Rated = db.Column(db.String(500))
+
+	def __init__(self,Movie_Name,Language,Cast,Desc,Release_Date,Closing_Date,Rating,User_No,User_Rated):
+		self.Movie_Name = Movie_Name
+		self.Language = Language
+		self.Cast = Cast
+		self.Desc = Desc
+		self.Release_Date = Release_Date
+		self.Closing_Date = Closing_Date
+		self.Rating = Rating
+		self.User_No=User_No
+		self.User_Rated = User_Rated
+
+	def to_dict(self):
+		return {
+			'Movie_Name' : self.Movie_Name,
+			'Language' : self.Language,
+			'Cast' : self.Cast,
+			'Desc' : self.Desc,
+			'Release_Date' : self.Release_Date,
+			'Closing_Date' : self.Closing_Date,
+			'Rating' : self.Rating,
+			'User_No' : self.User_No,
+			'User_Rated' : self.User_Rated,
+		}
+
+
+#+END_SRC
+
+** Controllers
+
+#+BEGIN_SRC
+
+from flask import Blueprint, request, session, jsonify, render_template, redirect
+from sqlalchemy.exc import IntegrityError
+from app import db
+from .models import Movies
+
+mod_movies = Blueprint('movies', __name__)
+@mod_movies.route('/rate',methods=['POST'])
+def rate():
+	rating=request.form['rate']
+	movie_name=request.form['movie_name']
+	user = request.form['user']
+	movie=Movies.query.filter(Movies.Movie_Name==movie_name).first()
+	if not user in eval(movie.User_Rated):
+		movie.User_No=movie.User_No+1
+		c=movie.User_No
+		db.	session.commit()
+		if movie.Rating=="NR":
+			movie.Rating = repr(int(rating)*25)+"%"
+		else:
+			q=movie.Rating
+			w=q.replace("%","")
+			r=int(float(w)/25.0)
+			t=int(float(rating))
+			r=r*(c-1)+t
+			print(c,type(c))
+			movie.Rating=repr(int((r*25)/c))+"%"
+			db.session.commit()
+		a=eval(movie.User_Rated)
+		a.append(user)
+		print(a)
+		movie.User_Rated=repr(a)
+		db.session.commit()
+		return jsonify(success="Thank You For Rating")
+	else:
+		return jsonify(success="Rated Already")
+
+@mod_movies.route('/add_movie',methods=['POST'])
+def new_movies():
+	try:
+		Movie_Name = request.form['Movie_Name']
+		Language = request.form['Language']
+		Cast = request.form['Cast']
+		Desc = request.form['Desc']
+		Release_Date = request.form['Release_Date']
+		Closing_Date = request.form['Closing_Date']
+
+	except KeyError as e:
+		return jsonify(success=False,message="%s not sent in the request" % e.args), 400
+
+	movie = Movies(Movie_Name,Language,Cast,Desc,Release_Date,Closing_Date,"NR",0,"[]")
+	db.session.add(movie)
+	try:
+		db.session.commit()
+	except IntegrityError as e:
+		return jsonify(success=False, message="This movie already exists"), 400
+
+	return redirect('/admin')
+
+
+@mod_movies.route('/remove_movie',methods=['POST'])
+def remove_movie():
+	try:
+		Movie_Name = request.form['Movie_Name']
+		for movie in Movies.query.filter(Movie_Name = Movie_Name).all():
+			db.session.delete(movie)
+		db.session.commit()
+
+	except KeyError as e:
+		return jsonify(success=False,message="%s not sent in the request" % e.args), 400
+
+
+#+END_SRC
+
+
+* Profile
+
+** Models
+
+#+BEGIN_SRC
+
+from flask_sqlalchemy import SQLAlchemy
+from app import db
+
+class Profile(db.Model):
+	__tablename__ = 'profile'
+	id = db.Column(db.Integer , primary_key=True,autoincrement=True)
+	User_Name = db.Column(db.String(120))
+	Movie_Name = db.Column(db.String(120))
+	Theatre_Name = db.Column(db.String(120))
+	Time = db.Column(db.String(500))
+	Date = db.Column(db.String(100))
+	Seats = db.Column(db.String(1000))
+	Show_Time = db.Column(db.String(500))
+
+	def __init__(self,User_Name,Movie_Name,Theatre_Name,Time,Date,Seats,Show_Time	):
+		self.User_Name = User_Name
+		self.Movie_Name = Movie_Name
+		self.Theatre_Name = Theatre_Name
+		self.Time = Time
+		self.Date = Date
+		self.Seats = Seats
+		self.Show_Time = Show_Time
+
+	def to_dict(self):
+		return {
+			'User_Name' : self.User_Name,
+			'Movie_Name' : self.Movie_Name,
+			'Theatre_Name' : self.Theatre_Name,
+			'Time' : self.Time,
+			'Date' : self.Date,
+			'Seats' : self.Seats,
+			'Show_Time' : self.Show_Time,
+		}
+
+
+#+END_SRC
+
+** Controllers
+
+#+BEGIN_SRC
+
+from flask import Blueprint, request, session, jsonify,redirect , render_template
+from sqlalchemy.exc import IntegrityError
+from app import db
+from .models import Profile
+from app.user.models import User
+
+mod_profile=Blueprint('profile', __name__)
+
+@mod_profile.route('/profile',methods=['GET','POST'])
+def show():
+	if request.method == 'GET':
+		user=User.query.filter(User.id==session['user_id']).first()
+		profile=Profile.query.filter(Profile.User_Name==user.username).all()
+		array=[]
+		count=1
+		for i in profile:
+			j=i.to_dict()
+			j['id']=count
+			array.append(j)
+			count=count+1
+		return render_template('profile.html',username=user.username,email=user.email,arr=array)
+	else:
+		user=User.query.filter(User.id==session['user_id']).first()
+		movie_name=request.form['movie_name']
+		theatre_name=request.form['theatre_name']
+		arr=request.form['arr']
+		date=request.form['date']
+		time=request.form['time']
+		show_time=request.form['show_time']
+		u=Profile(user.username,movie_name,theatre_name,time,date,arr,show_time)
+		db.session.add(u)
+		db.session.commit()
+		return redirect('/payment')
+
+
+#+END_SRC
+
+
+* Security
+ - we are storing the passwords in the form of hash value using the generate_password_hash and check_password_hash functions of werkzeug.security module for the security of user's password.
+
+
+* Designing Tools
+ - Bootstrap
+ - css

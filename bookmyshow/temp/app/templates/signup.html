@@ -1,0 +1,93 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>SIGNUP HERE</title>
+</head>
+<body>
+<div class="container-fluid">
+	<div align="center" style="font-size:150%; background-color:#0c1747; color:089c3e; height:100 ">
+	<br/>	SIGN UP HERE...!!<br/><br/>
+	</div>
+	<div style="background-color:#deeceb; height:885px;">
+	
+	<div class="signup_extra" align="center">
+	<br/>
+	<br/>
+		
+	<br/>
+	</div>
+	<center><a href="/home"><img class="img-rounded" src="{{ url_for('static', filename='home.jpg') }}" height="50" width="50" align="center"></a></center>
+	<br/>
+	<br/>
+	<div align ="center" class="row">
+	<div class="col-sm-4 col-sm-offset-4">
+	 <form method="POST" id="form" onsubmit="return false">
+	 	<legend>Register</legend>
+	 	 <p class="message text-danger"></p>
+		<div class="form-group">
+			<label for="register-email">Name*</label>
+			<input type="text" placeholder="Name" size="60" name="name" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="register-email">Email*</label>
+			<input type="text" placeholder="EMAIL ID" size="60" name="email" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="register-email">Username*</label>
+			<input type="text" placeholder="Username" size="60" name="username" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="register-email">Password*</label>
+			<input type="password" placeholder="PASSWORD" size="60" name="password" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="register-email">Re-type Pasword*</label>
+			<input type="password" placeholder="RE-TYPE PASSWORD" size="60" name="retype_password" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="register-email">Phone No</label>
+			<input type="text" placeholder="Phone No" size="60" name="phone" class="form-control">
+		</div>
+		<div  style="font-size:120%"><input type="checkbox" name="-----" value="------" size="60">I have read the <a href="https:// www.w3schools.com">Terms and condition*</a> and agree to them.<br></div>
+		<button class="btn btn-primary" onclick="register()">Sign Up</button></form></div>
+	</div>
+
+	<br/>
+	<br/>
+	<div align="center">
+		<br/>
+		Already a user?<a href="/login">Sign In</a><br/><br/>
+	</div>
+	</div>
+	</div>
+	<script>
+	
+	var register=function(){
+	console.log("13");
+	var v=document.getElementById("form");
+	name=v.name.value;
+	email=v.email.value;
+	username=v.username.value;
+	pass=v.password.value;
+	retype_pass=v.retype_password.value;
+	phone=v.phone.value;
+	console.log("hey");
+	$.ajax({
+		url:'http://127.0.0.1:5000/register',
+		method:'POST',
+		data:{name:name, email:email, username:username, password:pass, retype_password:retype_pass, phone:phone},
+		success:function(response){
+			window.location.href="http://127.0.0.1:5000/login";
+			console.log('hi');
+		},
+		error:function(response){
+			console.log(response.message);
+		}
+	});
+	};
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>SIGNUP HERE</title>
+</head>
+<body>
+<div class="container-fluid">
+	<div align="center" style="font-size:150%; background-color:#0c1747; color:089c3e; height:100 ">
+	<br/>	SIGN UP HERE...!!<br/><br/>
+	</div>
+	<div style="background-color:#deeceb; height:885px;">
+	
+	<div class="signup_extra" align="center">
+	<br/>
+	<br/>
+		 <a href="https://www.facebook.com/login.php?skip_api_login=1&api_key=165665113451029&signed_next=1&next=https%3A%2F%2Fwww.facebook.com%2Fv2.7%2Fdialog%2Foauth%3Fredirect_uri%3Dhttps%253A%252F%252Fstaticxx.facebook.com%252Fconnect%252Fxd_arbiter%252Fr%252FiPrOY23SGAp.js%253Fversion%253D42%2523cb%253Df214185e30c4efa%2526domain%253Din.bookmyshow.com%2526origin%253Dhttps%25253A%25252F%25252Fin.bookmyshow.com%25252Ff2d73cc12437902%2526relation%253Dopener%2526frame%253Df37bcca74d1617e%26display%3Dpopup%26scope%3Demail%252Cuser_friends%252Cpublic_profile%26response_type%3Dtoken%252Csigned_request%26domain%3Din.bookmyshow.com%26return_scopes%3Dtrue%26origin%3D1%26client_id%3D165665113451029%26ret%3Dlogin%26sdk%3Djoey%26logger_id%3D2816db5d-681f-c78f-a606-9d4fb2334b50&cancel_url=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FiPrOY23SGAp.js%3Fversion%3D42%23cb%3Df214185e30c4efa%26domain%3Din.bookmyshow.com%26origin%3Dhttps%253A%252F%252Fin.bookmyshow.com%252Ff2d73cc12437902%26relation%3Dopener%26frame%3Df37bcca74d1617e%26error%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%26e2e%3D%257B%257D&display=popup&locale=en_GB&logger_id=2816db5d-681f-c78f-a606-9d4fb2334b50"><img src="{{ url_for('static', filename='fb-logo.png') }}" height="50" width="200" class="img-rounded"></a>
+		 <a href="https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1#identifier"><img class="img-rounded" src="{{ url_for('static', filename='g.png') }}" height="50" width="200"></a>  		
+	<br/>
+	<br/>
+	</div>
+
+	<div style="width: 100%; height: 20px; border-bottom: 1px solid black; text-align: center">
+	  	<span style="font-size: 30px; background-color: white" class="img-circle">
+    			OR
+ 		</span>
+	</div>
+	<br/>
+	<br/>
+	<div align ="center" class="row">
+	<div class="col-sm-4 col-sm-offset-4">
+	 <form method="POST" id="form">
+	 	<legend>Register</legend>
+	 	 <p class="message text-danger"></p>
+		<div class="form-group">
+			<label for="register-email">Email</label>
+			<input type="text" placeholder="EMAIL ID*" size="60" name="email" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="register-email">Password</label>
+			<input type="password" placeholder="PASSWORD*" size="60" name="password" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="register-email">Re-type Pasword</label>
+			<input type="password" placeholder="RE-TYPE PASSWORD*" size="60" name="retype_password" class="form-control">
+		</div>
+		<div  style="font-size:120%"><input type="checkbox" name="-----" value="------" size="60">I have read the <a href="https:// www.w3schools.com">Terms and condition*</a> and agree to them.<br></div>
+		<button class="btn btn-primary" onclick="register()">Sign Up</button></form></div>
+	</div>
+
+	<br/>
+	<br/>
+	<div align="center">
+		<br/>
+		Already a user?<a href="/login">Sign In</a><br/><br/>
+	</div>
+	</div>
+	</div>
+	<script>
+	var register=function(){
+	console.log("13");
+	var v=document.getElementById("form");
+	email=v.email.value;
+	pass=v.password.value;
+	retype_pass=v.retype_password.value;
+	console.log("hey0");
+	$.ajax({
+		url:'http://127.0.0.1:8080/register',
+		method:'POST',
+		dataType:'json',
+		data:{email:email, password:pass, retype_password:retype_pass},
+		success:function(response){
+			document.write(response);
+			console.log('hi');
+		},
+		error:function(response){
+			alert(response.message);
+		}
+	});
+	};
+	
+</script>
+</body>
+</html>

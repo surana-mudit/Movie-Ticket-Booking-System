@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+/*.seat {
+ background-color: #4CAF50;  Green 
+    border: none;
+    color: white
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;  Safari 
+    transition-duration: 0.4s;
+    cursor: pointer;
+}*/
+
+.seat {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+
+.seat:hover {
+    background-color: blue;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+</style>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<title>Select your seats</title>
+</head>
+<body style="background-color: grey;">
+<div class="container">
+<div class="jumbotron" style="background-color: white">
+<div class="row">
+<div class="col-md-6"><h1>Movie:</h1></div><div class="col-md-6"><h1 id="movie_name" style="color: black; text-align: center;">{{ movie_name }}</h1></div>
+</div>
+<div class="row">
+<div class="col-md-6"><h1>Theatre:</h1></div><div class="col-md-6"><h1 id="name" style="color: black; text-align: center;">{{ theatre_name }}</h1></div>
+</div>
+<div class="row">
+<div class="col-md-6"><h1>Show Time:</h1></div><div class="col-md-6"><h1 id="time" style="color: black; text-align: center;">{{ time }}</h1></div>
+</div>
+</div>
+</div>
+<center>
+ <fieldset style="width:1000px; height:270px; color: white" class="platinum" >
+  <legend style="color: white">Platinum(250/-):</legend>
+  	<center>
+ A &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <button class="seat" id="A1"><center><img src="../../../../static/img/R_chair.gif"><br/>1</center></button>
+	<button class="seat" id="A2"><center><img src="../../../../static/img/R_chair.gif"><br/>2</center></button>
+	<button class="seat" id="A3"><center><img src="../../../../static/img/R_chair.gif"><br/>3</center></button>
+	<button class="seat" id="A4"><center><img src="../../../../static/img/R_chair.gif"><br/>4</center></button>
+	<button class="seat" id="A5"><center><img src="../../../../static/img/R_chair.gif"><br/>5</center></button>
+	<button class="seat" id="A6"><center><img src="../../../../static/img/R_chair.gif"><br/>6</center></button>
+	<button class="seat" id="A7"><center><img src="../../../../static/img/R_chair.gif"><br/>7</center></button>
+	<button class="seat" id="A8"><center><img src="../../../../static/img/R_chair.gif"><br/>8</center></button>
+	<button class="seat" id="A9"><center><img src="../../../../static/img/R_chair.gif"><br/>9</center></button>
+	<button class="seat" id="A10"><center><img src="../../../../static/img/R_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="A11"><center><img src="../../../../static/img/R_chair.gif"><br/>11</center></button>
+	<button class="seat" id="A12"><center><img src="../../../../static/img/R_chair.gif"><br/>12</center></button>
+	<button class="seat" id="A13"><center><img src="../../../../static/img/R_chair.gif"><br/>13</center></button>
+	<button class="seat" id="A14"><center><img src="../../../../static/img/R_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ B &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="B1"><center><img src="../../../../static/img/R_chair.gif"><br/>1</center></button>
+	<button class="seat" id="B2"><center><img src="../../../../static/img/R_chair.gif"><br/>2</center></button>
+	<button class="seat" id="B3"><center><img src="../../../../static/img/R_chair.gif"><br/>3</center></button>
+	<button class="seat" id="B4"><center><img src="../../../../static/img/R_chair.gif"><br/>4</center></button>
+	<button class="seat" id="B5"><center><img src="../../../../static/img/R_chair.gif"><br/>5</center></button>
+	<button class="seat" id="B6"><center><img src="../../../../static/img/R_chair.gif"><br/>6</center></button>
+	<button class="seat" id="B7"><center><img src="../../../../static/img/R_chair.gif"><br/>7</center></button>
+	<button class="seat" id="B8"><center><img src="../../../../static/img/R_chair.gif"><br/>8</center></button>
+	<button class="seat" id="B9"><center><img src="../../../../static/img/R_chair.gif"><br/>9</center></button>
+	<button class="seat" id="B10"><center><img src="../../../../static/img/R_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="B11"><center><img src="../../../../static/img/R_chair.gif"><br/>11</center></button>
+	<button class="seat" id="B12"><center><img src="../../../../static/img/R_chair.gif"><br/>12</center></button>
+	<button class="seat" id="B13"><center><img src="../../../../static/img/R_chair.gif"><br/>13</center></button>
+	<button class="seat" id="B14"><center><img src="../../../../static/img/R_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ C &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="C1"><center><img src="../../../../static/img/R_chair.gif"><br/>1</center></button>
+	<button class="seat" id="C2"><center><img src="../../../../static/img/R_chair.gif"><br/>2</center></button>
+	<button class="seat" id="C3"><center><img src="../../../../static/img/R_chair.gif"><br/>3</center></button>
+	<button class="seat" id="C4"><center><img src="../../../../static/img/R_chair.gif"><br/>4</center></button>
+	<button class="seat" id="C5"><center><img src="../../../../static/img/R_chair.gif"><br/>5</center></button>
+	<button class="seat" id="C6"><center><img src="../../../../static/img/R_chair.gif"><br/>6</center></button>
+	<button class="seat" id="C7"><center><img src="../../../../static/img/R_chair.gif"><br/>7</center></button>
+	<button class="seat" id="C8"><center><img src="../../../../static/img/R_chair.gif"><br/>8</center></button>
+	<button class="seat" id="C9"><center><img src="../../../../static/img/R_chair.gif"><br/>9</center></button>
+	<button class="seat" id="C10"><center><img src="../../../../static/img/R_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="C11"><center><img src="../../../../static/img/R_chair.gif"><br/>11</center></button>
+	<button class="seat" id="C12"><center><img src="../../../../static/img/R_chair.gif"><br/>12</center></button>
+	<button class="seat" id="C13"><center><img src="../../../../static/img/R_chair.gif"><br/>13</center></button>
+	<button class="seat" id="C14"><center><img src="../../../../static/img/R_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ D &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="D1"><center><img src="../../../../static/img/R_chair.gif"><br/>1</center></button>
+	<button class="seat" id="D2"><center><img src="../../../../static/img/R_chair.gif"><br/>2</center></button>
+	<button class="seat" id="D3"><center><img src="../../../../static/img/R_chair.gif"><br/>3</center></button>
+	<button class="seat" id="D4"><center><img src="../../../../static/img/R_chair.gif"><br/>4</center></button>
+	<button class="seat" id="D5"><center><img src="../../../../static/img/R_chair.gif"><br/>5</center></button>
+	<button class="seat" id="D6"><center><img src="../../../../static/img/R_chair.gif"><br/>6</center></button>
+	<button class="seat" id="D7"><center><img src="../../../../static/img/R_chair.gif"><br/>7</center></button>
+	<button class="seat" id="D8"><center><img src="../../../../static/img/R_chair.gif"><br/>8</center></button>
+	<button class="seat" id="D9"><center><img src="../../../../static/img/R_chair.gif"><br/>9</center></button>
+	<button class="seat" id="D10"><center><img src="../../../../static/img/R_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="D11"><center><img src="../../../../static/img/R_chair.gif"><br/>11</center></button>
+	<button class="seat" id="D12"><center><img src="../../../../static/img/R_chair.gif"><br/>12</center></button>
+	<button class="seat" id="D13"><center><img src="../../../../static/img/R_chair.gif"><br/>13</center></button>
+	<button class="seat" id="D14"><center><img src="../../../../static/img/R_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ E &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="E1"><center><img src="../../../../static/img/R_chair.gif"><br/>1</center></button>
+	<button class="seat" id="E2"><center><img src="../../../../static/img/R_chair.gif"><br/>2</center></button>
+	<button class="seat" id="E3"><center><img src="../../../../static/img/R_chair.gif"><br/>3</center></button>
+	<button class="seat" id="E4"><center><img src="../../../../static/img/R_chair.gif"><br/>4</center></button>
+	<button class="seat" id="E5"><center><img src="../../../../static/img/R_chair.gif"><br/>5</center></button>
+	<button class="seat" id="E6"><center><img src="../../../../static/img/R_chair.gif"><br/>6</center></button>
+	<button class="seat" id="E7"><center><img src="../../../../static/img/R_chair.gif"><br/>7</center></button>
+	<button class="seat" id="E8"><center><img src="../../../../static/img/R_chair.gif"><br/>8</center></button>
+	<button class="seat" id="E9"><center><img src="../../../../static/img/R_chair.gif"><br/>9</center></button>
+	<button class="seat" id="E10"><center><img src="../../../../static/img/R_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="E11"><center><img src="../../../../static/img/R_chair.gif"><br/>11</center></button>
+	<button class="seat" id="E12"><center><img src="../../../../static/img/R_chair.gif"><br/>12</center></button>
+	<button class="seat" id="E13"><center><img src="../../../../static/img/R_chair.gif"><br/>13</center></button>
+	<button class="seat" id="E14"><center><img src="../../../../static/img/R_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ F &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="F1"><center><img src="../../../../static/img/R_chair.gif"><br/>1</center></button>
+	<button class="seat" id="F2"><center><img src="../../../../static/img/R_chair.gif"><br/>2</center></button>
+	<button class="seat" id="F3"><center><img src="../../../../static/img/R_chair.gif"><br/>3</center></button>
+	<button class="seat" id="F4"><center><img src="../../../../static/img/R_chair.gif"><br/>4</center></button>
+	<button class="seat" id="F5"><center><img src="../../../../static/img/R_chair.gif"><br/>5</center></button>
+	<button class="seat" id="F6"><center><img src="../../../../static/img/R_chair.gif"><br/>6</center></button>
+	<button class="seat" id="F7"><center><img src="../../../../static/img/R_chair.gif"><br/>7</center></button>
+	<button class="seat" id="F8"><center><img src="../../../../static/img/R_chair.gif"><br/>8</center></button>
+	<button class="seat" id="F9"><center><img src="../../../../static/img/R_chair.gif"><br/>9</center></button>
+	<button class="seat" id="F10"><center><img src="../../../../static/img/R_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="F11"><center><img src="../../../../static/img/R_chair.gif"><br/>11</center></button>
+	<button class="seat" id="F12"><center><img src="../../../../static/img/R_chair.gif"><br/>12</center></button>
+	<button class="seat" id="F13"><center><img src="../../../../static/img/R_chair.gif"><br/>13</center></button>
+	<button class="seat" id="F14"><center><img src="../../../../static/img/R_chair.gif"><br/>14</center></button>
+	  </center>
+  </fieldset>
+
+<br/>
+<br/>
+<br/>
+
+
+ <fieldset style="width:1000px; height:230px; color: white" class="gold">
+  <legend style="color: white">Gold(200/-):</legend>
+  	<center>
+ G &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="G1"><center><img src="../../../../static/img/G_chair.gif"><br/>1</center></button>
+	<button class="seat" id="G2"><center><img src="../../../../static/img/G_chair.gif"><br/>2</center></button>
+	<button class="seat" id="G3"><center><img src="../../../../static/img/G_chair.gif"><br/>3</center></button>
+	<button class="seat" id="G4"><center><img src="../../../../static/img/G_chair.gif"><br/>4</center></button>
+	<button class="seat" id="G5"><center><img src="../../../../static/img/G_chair.gif"><br/>5</center></button>
+	<button class="seat" id="G6"><center><img src="../../../../static/img/G_chair.gif"><br/>6</center></button>
+	<button class="seat" id="G7"><center><img src="../../../../static/img/G_chair.gif"><br/>7</center></button>
+	<button class="seat" id="G8"><center><img src="../../../../static/img/G_chair.gif"><br/>8</center></button>
+	<button class="seat" id="G9"><center><img src="../../../../static/img/G_chair.gif"><br/>9</center></button>
+	<button class="seat" id="G10"><center><img src="../../../../static/img/G_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="G11"><center><img src="../../../../static/img/G_chair.gif"><br/>11</center></button>
+	<button class="seat" id="G12"><center><img src="../../../../static/img/G_chair.gif"><br/>12</center></button>
+	<button class="seat" id="G13"><center><img src="../../../../static/img/G_chair.gif"><br/>13</center></button>
+	<button class="seat" id="G14"><center><img src="../../../../static/img/G_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ H &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="H1"><center><img src="../../../../static/img/G_chair.gif"><br/>1</center></button>
+	<button class="seat" id="H2"><center><img src="../../../../static/img/G_chair.gif"><br/>2</center></button>
+	<button class="seat" id="H3"><center><img src="../../../../static/img/G_chair.gif"><br/>3</center></button>
+	<button class="seat" id="H4"><center><img src="../../../../static/img/G_chair.gif"><br/>4</center></button>
+	<button class="seat" id="H5"><center><img src="../../../../static/img/G_chair.gif"><br/>5</center></button>
+	<button class="seat" id="H6"><center><img src="../../../../static/img/G_chair.gif"><br/>6</center></button>
+	<button class="seat" id="H7"><center><img src="../../../../static/img/G_chair.gif"><br/>7</center></button>
+	<button class="seat" id="H8"><center><img src="../../../../static/img/G_chair.gif"><br/>8</center></button>
+	<button class="seat" id="H9"><center><img src="../../../../static/img/G_chair.gif"><br/>9</center></button>
+	<button class="seat" id="H10"><center><img src="../../../../static/img/G_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="H11"><center><img src="../../../../static/img/G_chair.gif"><br/>11</center></button>
+	<button class="seat" id="H12"><center><img src="../../../../static/img/G_chair.gif"><br/>12</center></button>
+	<button class="seat" id="H13"><center><img src="../../../../static/img/G_chair.gif"><br/>13</center></button>
+	<button class="seat" id="H14"><center><img src="../../../../static/img/G_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ I &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="I1"><center><img src="../../../../static/img/G_chair.gif"><br/>1</center></button>
+	<button class="seat" id="I2"><center><img src="../../../../static/img/G_chair.gif"><br/>2</center></button>
+	<button class="seat" id="I3"><center><img src="../../../../static/img/G_chair.gif"><br/>3</center></button>
+	<button class="seat" id="I4"><center><img src="../../../../static/img/G_chair.gif"><br/>4</center></button>
+	<button class="seat" id="I5"><center><img src="../../../../static/img/G_chair.gif"><br/>5</center></button>
+	<button class="seat" id="I6"><center><img src="../../../../static/img/G_chair.gif"><br/>6</center></button>
+	<button class="seat" id="I7"><center><img src="../../../../static/img/G_chair.gif"><br/>7</center></button>
+	<button class="seat" id="I8"><center><img src="../../../../static/img/G_chair.gif"><br/>8</center></button>
+	<button class="seat" id="I9"><center><img src="../../../../static/img/G_chair.gif"><br/>9</center></button>
+	<button class="seat" id="I10"><center><img src="../../../../static/img/G_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="I11"><center><img src="../../../../static/img/G_chair.gif"><br/>11</center></button>
+	<button class="seat" id="I12"><center><img src="../../../../static/img/G_chair.gif"><br/>12</center></button>
+	<button class="seat" id="I13"><center><img src="../../../../static/img/G_chair.gif"><br/>13</center></button>
+	<button class="seat" id="I14"><center><img src="../../../../static/img/G_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ J &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="J1"><center><img src="../../../../static/img/G_chair.gif"><br/>1</center></button>
+	<button class="seat" id="J2"><center><img src="../../../../static/img/G_chair.gif"><br/>2</center></button>
+	<button class="seat" id="J3"><center><img src="../../../../static/img/G_chair.gif"><br/>3</center></button>
+	<button class="seat" id="J4"><center><img src="../../../../static/img/G_chair.gif"><br/>4</center></button>
+	<button class="seat" id="J5"><center><img src="../../../../static/img/G_chair.gif"><br/>5</center></button>
+	<button class="seat" id="J6"><center><img src="../../../../static/img/G_chair.gif"><br/>6</center></button>
+	<button class="seat" id="J7"><center><img src="../../../../static/img/G_chair.gif"><br/>7</center></button>
+	<button class="seat" id="J8"><center><img src="../../../../static/img/G_chair.gif"><br/>8</center></button>
+	<button class="seat" id="J9"><center><img src="../../../../static/img/G_chair.gif"><br/>9</center></button>
+	<button class="seat" id="J10"><center><img src="../../../../static/img/G_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="J11"><center><img src="../../../../static/img/G_chair.gif"><br/>11</center></button>
+	<button class="seat" id="J12"><center><img src="../../../../static/img/G_chair.gif"><br/>12</center></button>
+	<button class="seat" id="J13"><center><img src="../../../../static/img/G_chair.gif"><br/>13</center></button>
+	<button class="seat" id="J14"><center><img src="../../../../static/img/G_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ K &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="K1"><center><img src="../../../../static/img/G_chair.gif"><br/>1</center></button>
+	<button class="seat" id="K2"><center><img src="../../../../static/img/G_chair.gif"><br/>2</center></button>
+	<button class="seat" id="K3"><center><img src="../../../../static/img/G_chair.gif"><br/>3</center></button>
+	<button class="seat" id="K4"><center><img src="../../../../static/img/G_chair.gif"><br/>4</center></button>
+	<button class="seat" id="K5"><center><img src="../../../../static/img/G_chair.gif"><br/>5</center></button>
+	<button class="seat" id="K6"><center><img src="../../../../static/img/G_chair.gif"><br/>6</center></button>
+	<button class="seat" id="K7"><center><img src="../../../../static/img/G_chair.gif"><br/>7</center></button>
+	<button class="seat" id="K8"><center><img src="../../../../static/img/G_chair.gif"><br/>8</center></button>
+	<button class="seat" id="K9"><center><img src="../../../../static/img/G_chair.gif"><br/>9</center></button>
+	<button class="seat" id="K10"><center><img src="../../../../static/img/G_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="K11"><center><img src="../../../../static/img/G_chair.gif"><br/>11</center></button>
+	<button class="seat" id="K12"><center><img src="../../../../static/img/G_chair.gif"><br/>12</center></button>
+	<button class="seat" id="K13"><center><img src="../../../../static/img/G_chair.gif"><br/>13</center></button>
+	<button class="seat" id="K14"><center><img src="../../../../static/img/G_chair.gif"><br/>14</center></button>
+	  </center>
+
+ </fieldset>
+
+
+
+
+<br/>
+<br/>
+<br/>
+
+
+
+
+
+ <fieldset style="width:1000px; height:190px; color: white" class="silver">
+  <legend style="color: white">Silver(150/-):</legend>
+  	<center>
+ L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="L1"><center><img src="../../../../static/img/Gy_chair.gif"><br/>1</center></button>
+	<button class="seat" id="L2"><center><img src="../../../../static/img/Gy_chair.gif"><br/>2</center></button>
+	<button class="seat" id="L3"><center><img src="../../../../static/img/Gy_chair.gif"><br/>3</center></button>
+	<button class="seat" id="L4"><center><img src="../../../../static/img/Gy_chair.gif"><br/>4</center></button>
+	<button class="seat" id="L5"><center><img src="../../../../static/img/Gy_chair.gif"><br/>5</center></button>
+	<button class="seat" id="L6"><center><img src="../../../../static/img/Gy_chair.gif"><br/>6</center></button>
+	<button class="seat" id="L7"><center><img src="../../../../static/img/Gy_chair.gif"><br/>7</center></button>
+	<button class="seat" id="L8"><center><img src="../../../../static/img/Gy_chair.gif"><br/>8</center></button>
+	<button class="seat" id="L9"><center><img src="../../../../static/img/Gy_chair.gif"><br/>9</center></button>
+	<button class="seat" id="L10"><center><img src="../../../../static/img/Gy_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="L11"><center><img src="../../../../static/img/Gy_chair.gif"><br/>11</center></button>
+	<button class="seat" id="L12"><center><img src="../../../../static/img/Gy_chair.gif"><br/>12</center></button>
+	<button class="seat" id="L13"><center><img src="../../../../static/img/Gy_chair.gif"><br/>13</center></button>
+	<button class="seat" id="L14"><center><img src="../../../../static/img/Gy_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ M &nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="M1"><center><img src="../../../../static/img/Gy_chair.gif"><br/>1</center></button>
+	<button class="seat" id="M2"><center><img src="../../../../static/img/Gy_chair.gif"><br/>2</center></button>
+	<button class="seat" id="M3"><center><img src="../../../../static/img/Gy_chair.gif"><br/>3</center></button>
+	<button class="seat" id="M4"><center><img src="../../../../static/img/Gy_chair.gif"><br/>4</center></button>
+	<button class="seat" id="M5"><center><img src="../../../../static/img/Gy_chair.gif"><br/>5</center></button>
+	<button class="seat" id="M6"><center><img src="../../../../static/img/Gy_chair.gif"><br/>6</center></button>
+	<button class="seat" id="M7"><center><img src="../../../../static/img/Gy_chair.gif"><br/>7</center></button>
+	<button class="seat" id="M8"><center><img src="../../../../static/img/Gy_chair.gif"><br/>8</center></button>
+	<button class="seat" id="M9"><center><img src="../../../../static/img/Gy_chair.gif"><br/>9</center></button>
+	<button class="seat" id="M10"><center><img src="../../../../static/img/Gy_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="M11"><center><img src="../../../../static/img/Gy_chair.gif"><br/>11</center></button>
+	<button class="seat" id="M12"><center><img src="../../../../static/img/Gy_chair.gif"><br/>12</center></button>
+	<button class="seat" id="M13"><center><img src="../../../../static/img/Gy_chair.gif"><br/>13</center></button>
+	<button class="seat" id="M14"><center><img src="../../../../static/img/Gy_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ N &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="N1"><center><img src="../../../../static/img/Gy_chair.gif"><br/>1</center></button>
+	<button class="seat" id="N2"><center><img src="../../../../static/img/Gy_chair.gif"><br/>2</center></button>
+	<button class="seat" id="N3"><center><img src="../../../../static/img/Gy_chair.gif"><br/>3</center></button>
+	<button class="seat" id="N4"><center><img src="../../../../static/img/Gy_chair.gif"><br/>4</center></button>
+	<button class="seat" id="N5"><center><img src="../../../../static/img/Gy_chair.gif"><br/>5</center></button>
+	<button class="seat" id="N6"><center><img src="../../../../static/img/Gy_chair.gif"><br/>6</center></button>
+	<button class="seat" id="N7"><center><img src="../../../../static/img/Gy_chair.gif"><br/>7</center></button>
+	<button class="seat" id="N8"><center><img src="../../../../static/img/Gy_chair.gif"><br/>8</center></button>
+	<button class="seat" id="N9"><center><img src="../../../../static/img/Gy_chair.gif"><br/>9</center></button>
+	<button class="seat" id="N10"><center><img src="../../../../static/img/Gy_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="N11"><center><img src="../../../../static/img/Gy_chair.gif"><br/>11</center></button>
+	<button class="seat" id="N12"><center><img src="../../../../static/img/Gy_chair.gif"><br/>12</center></button>
+	<button class="seat" id="N13"><center><img src="../../../../static/img/Gy_chair.gif"><br/>13</center></button>
+	<button class="seat" id="N14"><center><img src="../../../../static/img/Gy_chair.gif"><br/>14</center></button>
+	  </center>
+
+	  <center>
+ O &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	<button class="seat" id="O1"><center><img src="../../../../static/img/Gy_chair.gif"><br/>1</center></button>
+	<button class="seat" id="O2"><center><img src="../../../../static/img/Gy_chair.gif"><br/>2</center></button>
+	<button class="seat" id="O3"><center><img src="../../../../static/img/Gy_chair.gif"><br/>3</center></button>
+	<button class="seat" id="O4"><center><img src="../../../../static/img/Gy_chair.gif"><br/>4</center></button>
+	<button class="seat" id="O5"><center><img src="../../../../static/img/Gy_chair.gif"><br/>5</center></button>
+	<button class="seat" id="O6"><center><img src="../../../../static/img/Gy_chair.gif"><br/>6</center></button>
+	<button class="seat" id="O7"><center><img src="../../../../static/img/Gy_chair.gif"><br/>7</center></button>
+	<button class="seat" id="O8"><center><img src="../../../../static/img/Gy_chair.gif"><br/>8</center></button>
+	<button class="seat" id="O9"><center><img src="../../../../static/img/Gy_chair.gif"><br/>9</center></button>
+	<button class="seat" id="O10"><center><img src="../../../../static/img/Gy_chair.gif"><br/>10</center></button>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="seat" id="O11"><center><img src="../../../../static/img/Gy_chair.gif"><br/>11</center></button>
+	<button class="seat" id="O12"><center><img src="../../../../static/img/Gy_chair.gif"><br/>12</center></button>
+	<button class="seat" id="O13"><center><img src="../../../../static/img/Gy_chair.gif"><br/>13</center></button>
+	<button class="seat" id="O14"><center><img src="../../../../static/img/Gy_chair.gif"><br/>14</center></button>
+	  </center>
+
+ </fieldset>
+<br />
+<br />	<br />
+<br />
+<div style="background-color: white;width: 600px;border-radius: 25px;background-position: left top; background-repeat: repeat;padding: 10px">
+	<h2 style="text-align: center;">ALL EYES THIS WAY</h2>
+</div>
+ </center>
+ <div style="text-align: right; background-color: grey">
+<h3 style="color: white; text-align: center;">Total Bill: </h3>
+<div class="form-group" style="text-align: center;">
+<input style="text-align: center;" type="text" name="" id="bill" readonly /><br />
+<button id="pay" onclick="pay()" class="btn btn-success">Pay Now</button>
+</div>
+</div></center>
+
+<script type="text/javascript">
+var name=document.getElementById("name").innerHTML;
+var time=document.getElementById("time").innerHTML;
+var movie_name=document.getElementById("movie_name").innerHTML;
+$(document).ready(function(){
+$.ajax({
+	url: 'https://127.0.0.1:5000/blocked',
+	method: 'POST',
+	data: {name: movie_name, theatre_name: name},
+	success:function(response){
+		seats=response.seats;
+		console.log(seats);
+		if(time==="9AM"){
+			for(i in seats[0]){
+				$("#"+seats[0][i]).attr("disabled","disabled");
+				$("#"+seats[0][i]).css("background-color","grey");
+			}
+		}
+		else if(time==="12PM"){
+			for(i in seats[1]){
+				$("#"+seats[1][i]).attr("disabled","disabled");
+				$("#"+seats[1][i]).css("background-color","grey");
+			}
+		}
+
+		else if(time==="3PM"){
+			for(i in seats[2]){
+				$("#"+seats[2][i]).attr("disabled","disabled");
+				$("#"+seats[2][i]).css("background-color","grey");
+			}
+		}
+
+		else if(time==="6PM"){
+			for(i in seats[3]){
+				$("#"+seats[3][i]).attr("disabled","disabled");
+				$("#"+seats[3][i]).css("background-color","grey");
+			}
+		}
+
+		else if(time==="9PM"){
+			for(i in seats[4]){
+				$("#"+seats[4][i]).attr("disabled","disabled");
+				$("#"+seats[4][i]).css("background-color","grey");
+			}
+		}
+	},
+	error:function(response){
+		console.log("error");
+	}
+});
+});
+var myarr=[];
+//$(document).ready(function(){
+	var sum=0;
+	$("#bill").val(sum);
+	$(".seat").click(function(){
+		id=this.id;
+		console.log(id[0]);
+		if($("#"+id).css("background-color") === "rgb(0, 140, 186)"){
+			console.log("deselect");
+			$("#"+id).css("background-color","white");
+			$("#"+id).hover(function(){
+				if ($("#"+id).css("background-color") === "rgb(255,255,255)")
+				{
+				$(this).css("background-color","blue");
+			}
+			},function(){
+				if ($("#"+id).css("background-color") != "rgb(0, 140, 186)"){
+					$(this).css("background-color","white");
+				}
+			});
+			if ($("#"+id).css("background-color") === "rgb(255,255,255)")
+			{$("#"+id).mouseover(function(){
+				$(this).css("background-color","blue");
+			});};
+			//$("#"+id).css("background-color","white");
+			if(id[0]==='A' || id[0]==='B' || id[0]==='C' || id[0]==='D' || id[0]==='E' || id[0]==='F'){
+				sum=sum-250;
+			}
+			else if(id[0]==='K' || id[0]==='J' || id[0]==='I' || id[0]==='H' || id[0]==='G'){
+				sum=sum-200;
+			}	
+			else{
+				sum=sum-150;
+			}
+			console.log(sum);
+			$("#bill").val(sum);
+			for (i in myarr) {
+				if(myarr[i]===id){
+					myarr.splice(i,1);
+					break;
+				}
+			}
+			console.log(myarr);
+		}
+		else{	
+			console.log("select");
+			$("#"+id).css("background-color","#008CBA");
+			if(id[0]==='A' || id[0]==='B' || id[0]==='C' || id[0]==='D' || id[0]==='E' || id[0]==='F'){
+				sum=sum+250;
+			}
+			else if(id[0]==='K' || id[0]==='J' || id[0]==='I' || id[0]==='H' || id[0]==='G'){
+				sum=sum+200;
+			}
+			else{
+				sum=sum+150;
+			}
+			console.log(sum);
+			$("#bill").val(sum);
+			myarr.push(id);
+			console.log(myarr);
+		}
+	});
+	var a="";
+	var status="";
+	var currentdate = new Date(); 
+	var b=currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear();
+	var c=currentdate.getHours() + ":"  + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+	console.log(name,time);
+	var pay=function(){
+		console.log(myarr);
+		a+=myarr.toString();
+		console.log(typeof(a));
+		func();
+	};
+var func=function(){
+	$.ajax({
+    url:'https://127.0.0.1:5000/movies',
+    method:'POST',
+    success:function(response){
+      console.log(response);
+      status=response.state;
+      if(status==="LOGOUT"){
+      	if(sum===0){
+      		alert("Please Select Seats");
+      		return;
+      	}
+      	func2();
+      }
+      else{
+      	alert("Please Login");
+      	window.location.href="/login";
+      }
+  },
+  });
+}
+
+	var func2=function(){
+		$.ajax({
+			url: 'https://127.0.0.1:5000/Big/'+movie_name+'/'+name+'/'+time,
+			method: 'POST',
+			data: {arr: a},
+			success:function(response){
+				console.log(response);
+				if(status==="LOGOUT"){
+					func1();
+				}
+				else{
+					window.location.href="/login";
+				}	
+			},
+			error:function(response){
+				console.log(response);
+			}
+		});
+	};
+	var func1=function(){
+		$.ajax({
+			url: 'https://127.0.0.1:5000/profile',
+			method: 'POST',
+			data: {movie_name: movie_name,theatre_name: name,arr: a,date: b,time: c,show_time: time},
+			success:function(response){
+				console.log(response);
+				window.location.href="/payment";
+			},
+			error:function(response){
+				console.log(response);
+			}
+		});
+	}
+	/*$.ajax({
+    	url:'https://127.0.0.1:5000/movies',
+    	method:'POST',
+    	success:function(response){
+      		console.log(response);
+      		if(response.state==="LOGOUT"){
+          		window.location.href="/payment";
+      		}
+      		else{
+        		window.location.href="/login";
+      		}   		
+    	}
+	});*/	
+</script>
+</body>
+</html>

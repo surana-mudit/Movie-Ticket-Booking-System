@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Admin's Page</title>
+</head>
+<body>
+	<h1 style="text-align: center; text-decoration: underline;">ADD MOVIE</h1>
+	<div class = 'addmovie'>
+		<form method="POST" action="/add_movie" >
+			<table style="width: 100%" align="center">
+				<tr>
+					<td style="text-align: center;">MOVIE NAME:</td>
+					<td style="text-align: center;"><input type="text" placeholder="Movie Name" name="Movie_Name"/></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">LANGUAGE:</td>
+					<td style="text-align: center;"><select name = 'Language'>
+							<option value="Hindi">Hindi</option>
+							<option value="English">English</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">CASTING:</td>
+					<td style="text-align: center;"><input type="text" placeholder="Main Actor" name="Cast"/></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">DESCRIPTION:</td>
+					<td style="text-align: center;"><textarea rows="4" cols="50" name="Desc" placeholder="Write some description about the movie here"></textarea></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">RELEASE DATE:</td>
+					<td style="text-align: center;"><input type="text" placeholder="dd/mm/yyyy" name="Release_Date"/></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">CLOSING DATE:</td>
+					<td style="text-align: center;"><input type="text" placeholder="dd/mm/yyyy" name="Closing_Date"/></td>
+				</tr>
+				<tr align="center"><button name="addMovie" onclick="alert('Movie Successfully Added')">ADD MOVIE</button></tr>
+			</table>
+		</form>
+	</div>
+	<hr/>
+	<h1 style="text-align: center; text-decoration: underline;">ADD THEATRE</h1>
+	<div class="addtheatre">
+		<form method="POST" action="/add_theatre">
+			<table style="width: 100%" align="center">
+				<tr>
+					<td style="text-align: center;">THEATRE NAME:</td>
+					<td style="text-align: center;"><input type="text" placeholder="Theatre Name" name="Theatre_Name"/></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">THEATRE TYPE:</td>
+					<td style="text-align: center;"><select name = 'Theatre_Type'>
+							<option value="Big">Big</option>
+							<option value="Medium">Medium</option>
+							<option value="Small">Small</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">DESCRIPTION:</td>
+					<td style="text-align: center;"><textarea rows="4" cols="50" name="Theatre_Desc" placeholder="Write some description about the theatre here"></textarea></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">THEATRE CONTACT:</td>
+					<td style="text-align: center;"><input type="text" placeholder="Theatre's Contact No. here" name="Theatre_Contact"/></td>
+				</tr>
+				<tr align="center"><button name="addTheatre" onclick="alert('Theatre Successfully Added')">ADD THEATRE</button></tr>
+			</table>
+		</form>
+	</div>
+	<br /><br /><br /><br />
+	<form action="/movies" method="GET">
+		<div style="text-align: center;"><button class="btn btn-primary">Go To Movies</button></div>
+	</form><br />
+	<form action="/home" method="GET">
+		<div style="text-align: center;"><button class="btn btn-success">Go To Home</button></div>
+	</form>
+	<br />
+	<form action="/logout" method="GET">
+		<div style="text-align: center;"><button class="btn btn-info">Logout</button></div>
+	</form>
+	<!--<h1 style="text-align: center;text-decoration: underline;">DELETE MOVIE</h1
+	<div class = 'deletemovie'>
+		<form method="POST" action="">
+			<table style="width: 100%" align="center">
+				<tr>
+					<td style="text-align: center;">MOVIE NAME:</td>
+					<td style="text-align: center;"><input type="text" placeholder="Movie Name" name = 'Movie_Name'/></td>
+				</tr>
+			</table>
+		</form>
+	</div>-->
+</body>
+</html>
